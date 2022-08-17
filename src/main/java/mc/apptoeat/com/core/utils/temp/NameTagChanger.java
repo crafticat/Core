@@ -11,8 +11,8 @@ public class NameTagChanger {
     private static Team team;
     private static Scoreboard scoreboard;
 
-    public static void changePlayerName(Player player, String prefix, String suffix, TeamAction action) {
-        if (player.getScoreboard() == null || prefix == null || suffix == null || action == null) {
+    public static void changePlayerName(Player player, String prefix, TeamAction action) {
+        if (player.getScoreboard() == null || prefix == null || action == null) {
             return;
         }
 
@@ -23,8 +23,7 @@ public class NameTagChanger {
         }
 
         team = scoreboard.getTeam(player.getName());
-        team.setPrefix(Color(prefix) + " ");
-        team.setSuffix(Color(suffix));
+        team.setPrefix(prefix);
         team.setNameTagVisibility(NameTagVisibility.ALWAYS);
 
         switch (action) {
@@ -35,8 +34,7 @@ public class NameTagChanger {
                 team.unregister();
                 scoreboard.registerNewTeam(player.getName());
                 team = scoreboard.getTeam(player.getName());
-                team.setPrefix(Color(prefix));
-                team.setSuffix(Color(suffix));
+                team.setPrefix(prefix);
                 team.setNameTagVisibility(NameTagVisibility.ALWAYS);
                 team.addPlayer(player);
                 break;
