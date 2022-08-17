@@ -19,7 +19,7 @@ public class RankSystem implements Listener {
     @EventHandler
     public void onJoin(PlayerJoinEvent e) {
         String group = LuckPermsProvider.get().getUserManager().getUser(e.getPlayer().getName()).getPrimaryGroup();
-        String groupPrefix = PlaceholderAPI.setPlaceholders(e.getPlayer(), "%luckperms_prefix_" + group + "%");
+        String groupPrefix = PlaceholderAPI.setPlaceholders(e.getPlayer(), "%luckperms_prefix%");
         e.getPlayer().setPlayerListName(Color.code(groupPrefix + " " + e.getPlayer().getName()));
         if (LuckPermsProvider.get().getUserManager().getUser(e.getPlayer().getName()).getPrimaryGroup().equalsIgnoreCase("rep")) {
             NameTagChanger.changePlayerName(e.getPlayer(), repPrefix, "", TeamAction.CREATE);
@@ -31,7 +31,7 @@ public class RankSystem implements Listener {
     @EventHandler
     public void onChat(AsyncPlayerChatEvent e) {
         String group = LuckPermsProvider.get().getUserManager().getUser(e.getPlayer().getName()).getPrimaryGroup();
-        String groupPrefix = PlaceholderAPI.setPlaceholders(e.getPlayer(), "%luckperms_prefix_" + group + "%");
+        String groupPrefix = PlaceholderAPI.setPlaceholders(e.getPlayer(), "%luckperms_prefix%");
         if (group.equalsIgnoreCase("default")) {
             e.setFormat(Color.code(groupPrefix + " " + e.getPlayer().getDisplayName() + "&7: &7") + e.getMessage());
         } else {
