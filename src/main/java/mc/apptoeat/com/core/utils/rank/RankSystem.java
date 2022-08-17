@@ -14,8 +14,6 @@ import org.bukkit.event.player.PlayerJoinEvent;
 
 
 public class RankSystem implements Listener {
-    
-    private String repPrefix = Color.code("&aRep");
 
     @EventHandler
     public void onJoin(PlayerJoinEvent e) {
@@ -25,9 +23,9 @@ public class RankSystem implements Listener {
         if (user != null) {
             String groupPrefix = user.getCachedData().getMetaData().getPrefix();
 
-            e.getPlayer().setPlayerListName(Color.code(groupPrefix + "" + e.getPlayer().getName()));
+            e.getPlayer().setPlayerListName(Color.code(groupPrefix + e.getPlayer().getName()));
             if (LuckPermsProvider.get().getUserManager().getUser(e.getPlayer().getName()).getPrimaryGroup().equalsIgnoreCase("rep")) {
-                NameTagChanger.changePlayerName(e.getPlayer(), repPrefix, "", TeamAction.CREATE);
+                NameTagChanger.changePlayerName(e.getPlayer(), groupPrefix, "", TeamAction.CREATE);
             } else {
                 NameTagChanger.changePlayerName(e.getPlayer(), groupPrefix, "", TeamAction.CREATE);
             }
