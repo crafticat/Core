@@ -36,7 +36,7 @@ public class PlayersItem extends Item {
             });
 
             //Teleport to player
-            actionGui.createGuiItem(new ItemStack(Material.ANVIL),9 + 5,"fTeleport to &b&l" + target.getName(),executedPlayer -> {
+            actionGui.createGuiItem(new ItemStack(Material.ANVIL),9 + 5,"Teleport to &b&l" + target.getName(),executedPlayer -> {
                 player.teleport(target.getLocation());
                 player.sendMessage(Color.code("&fYou have been teleported to &b" + target.getName()));
             });

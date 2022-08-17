@@ -6,6 +6,7 @@ import mc.apptoeat.com.core.utils.temp.TeamAction;
 import me.clip.placeholderapi.PlaceholderAPI;
 import net.luckperms.api.LuckPerms;
 import net.luckperms.api.LuckPermsProvider;
+import net.luckperms.api.model.user.User;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
@@ -19,23 +20,33 @@ public class RankSystem implements Listener {
     @EventHandler
     public void onJoin(PlayerJoinEvent e) {
         String group = LuckPermsProvider.get().getUserManager().getUser(e.getPlayer().getName()).getPrimaryGroup();
-        String groupPrefix = PlaceholderAPI.setPlaceholders(e.getPlayer(), "%luckperms_prefix_" + group + "%");
-        e.getPlayer().setPlayerListName(Color.code(groupPrefix + " " + e.getPlayer().getName()));
-        if (LuckPermsProvider.get().getUserManager().getUser(e.getPlayer().getName()).getPrimaryGroup().equalsIgnoreCase("rep")) {
-            NameTagChanger.changePlayerName(e.getPlayer(), repPrefix, "", TeamAction.CREATE);
-        } else {
-            NameTagChanger.changePlayerName(e.getPlayer(), groupPrefix, "", TeamAction.CREATE);
+        User user = LuckPermsProvider.get().getUserManager().getUser(e.getPlayer().getName());
+
+        if (user != null) {
+            String groupPrefix = user.getCachedData().getMetaData().getPrefix();
+
+            e.getPlayer().setPlayerListName(Color.code(groupPrefix + "" + e.getPlayer().getName()));
+            if (LuckPermsProvider.get().getUserManager().getUser(e.getPlayer().getName()).getPrimaryGroup().equalsIgnoreCase("rep")) {
+                NameTagChanger.changePlayerName(e.getPlayer(), repPrefix, "", TeamAction.CREATE);
+            } else {
+                NameTagChanger.changePlayerName(e.getPlayer(), groupPrefix, "", TeamAction.CREATE);
+            }
         }
     }
 
     @EventHandler
     public void onChat(AsyncPlayerChatEvent e) {
         String group = LuckPermsProvider.get().getUserManager().getUser(e.getPlayer().getName()).getPrimaryGroup();
-        String groupPrefix = PlaceholderAPI.setPlaceholders(e.getPlayer(), "%luckperms_prefix_" + group + "%");
-        if (group.equalsIgnoreCase("default")) {
-            e.setFormat(Color.code(groupPrefix + " " + e.getPlayer().getDisplayName() + "&7: &7") + e.getMessage());
-        } else {
-            e.setFormat(Color.code(groupPrefix + " " + e.getPlayer().getDisplayName() + "&7: &r") + e.getMessage());
+        User user = LuckPermsProvider.get().getUserManager().getUser(e.getPlayer().getName());
+
+        if (user != null) {
+            String groupPrefix = user.getCachedData().getMetaData().getPrefix();
+
+            if (group.equalsIgnoreCase("default")) {
+                e.setFormat(Color.code(groupPrefix + "" + e.getPlayer().getDisplayName() + "&7: &7") + e.getMessage());
+            } else {
+                e.setFormat(Color.code(groupPrefix + "" + e.getPlayer().getDisplayName() + "&7: &r") + e.getMessage());
+            }
         }
     }
 

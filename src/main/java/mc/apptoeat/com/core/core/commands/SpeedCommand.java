@@ -1,6 +1,5 @@
 package mc.apptoeat.com.core.core.commands;
 
-import javafx.beans.binding.NumberExpression;
 import mc.apptoeat.com.core.utils.commands.Command;
 import mc.apptoeat.com.core.utils.message.Color;
 import org.bukkit.entity.Player;
