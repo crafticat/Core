@@ -3,6 +3,8 @@ package mc.apptoeat.com.core.utils.rank;
 import mc.apptoeat.com.core.utils.message.Color;
 import mc.apptoeat.com.core.utils.temp.NameTagChanger;
 import mc.apptoeat.com.core.utils.temp.TeamAction;
+import me.clip.placeholderapi.PlaceholderAPI;
+import net.luckperms.api.LuckPerms;
 import net.luckperms.api.LuckPermsProvider;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -17,7 +19,7 @@ public class RankSystem implements Listener {
     @EventHandler
     public void onJoin(PlayerJoinEvent e) {
         String group = LuckPermsProvider.get().getUserManager().getUser(e.getPlayer().getName()).getPrimaryGroup();
-        String groupPrefix = LuckPermsProvider.get().getGroupManager().getGroup(group).getDisplayName();
+        String groupPrefix = PlaceholderAPI.setPlaceholders(e.getPlayer(), "%luckperms_prefix_" + group + "%");
         e.getPlayer().setPlayerListName(Color.code(groupPrefix + " " + e.getPlayer().getName()));
         if (LuckPermsProvider.get().getUserManager().getUser(e.getPlayer().getName()).getPrimaryGroup().equalsIgnoreCase("rep")) {
             NameTagChanger.changePlayerName(e.getPlayer(), repPrefix, "", TeamAction.CREATE);
@@ -29,7 +31,7 @@ public class RankSystem implements Listener {
     @EventHandler
     public void onChat(AsyncPlayerChatEvent e) {
         String group = LuckPermsProvider.get().getUserManager().getUser(e.getPlayer().getName()).getPrimaryGroup();
-        String groupPrefix = LuckPermsProvider.get().getGroupManager().getGroup(group).getDisplayName();
+        String groupPrefix = PlaceholderAPI.setPlaceholders(e.getPlayer(), "%luckperms_prefix_" + group + "%");
         if (group.equalsIgnoreCase("default")) {
             e.setFormat(Color.code(groupPrefix + " " + e.getPlayer().getDisplayName() + "&7: &7") + e.getMessage());
         } else {
