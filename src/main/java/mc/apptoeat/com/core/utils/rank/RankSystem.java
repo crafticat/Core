@@ -4,7 +4,6 @@ import mc.apptoeat.com.core.utils.message.Color;
 import mc.apptoeat.com.core.utils.temp.NameTagChanger;
 import mc.apptoeat.com.core.utils.temp.TeamAction;
 import me.clip.placeholderapi.PlaceholderAPI;
-import net.luckperms.api.LuckPerms;
 import net.luckperms.api.LuckPermsProvider;
 import net.luckperms.api.model.user.User;
 import org.bukkit.Bukkit;
@@ -17,20 +16,20 @@ import org.bukkit.event.player.PlayerJoinEvent;
 public class RankSystem implements Listener {
 
 
+
+    @EventHandler
     public void onJoin(PlayerJoinEvent e) {
+        String group = LuckPermsProvider.get().getUserManager().getUser(e.getPlayer().getName()).getPrimaryGroup();
         User user = LuckPermsProvider.get().getUserManager().getUser(e.getPlayer().getName());
 
         if (user != null) {
-            String groupPrefix = Color.code(user.getCachedData().getMetaData().getPrefix());
-            Bukkit.broadcastMessage("length " + groupPrefix.length());
-
-            Bukkit.broadcastMessage("groupPrefix " + groupPrefix);
-            //e.getPlayer().setPlayerListName(e.getPlayer().getName());
+            String groupPrefix = user.getCachedData().getMetaData().getPrefix();
+            e.getPlayer().setPlayerListName(Color.code(groupPrefix + " " + e.getPlayer().getName()));
 
             if (LuckPermsProvider.get().getUserManager().getUser(e.getPlayer().getName()).getPrimaryGroup().equalsIgnoreCase("rep")) {
-                NameTagChanger.changePlayerName(e.getPlayer(), groupPrefix, TeamAction.CREATE);
+                NameTagChanger.changePlayerName(e.getPlayer(), "rep", "", TeamAction.CREATE);
             } else {
-                NameTagChanger.changePlayerName(e.getPlayer(), groupPrefix, TeamAction.CREATE);
+                NameTagChanger.changePlayerName(e.getPlayer(), groupPrefix, "", TeamAction.CREATE);
             }
         }
     }
