@@ -16,58 +16,62 @@ public class GamemodeCommand extends Command {
 
     @Override
     public void executeCommand(Player player, String commandLabel, String[] args) {
-        GameMode mode = null;
-        Player target = null;
-        String arg0 = null;
-        String arg1 = null;
-        if (args.length > 0) {
-            arg0 = args[0];
-            if (args.length > 1) {
-                arg1 = args[1];
+        if (player.hasPermission("core.gamemode")) {
+            GameMode mode = null;
+            Player target = null;
+            String arg0 = null;
+            String arg1 = null;
+            if (args.length > 0) {
+                arg0 = args[0];
+                if (args.length > 1) {
+                    arg1 = args[1];
+                }
             }
-        }
 
-        //Get the gamemode
-        if (commandLabel.equalsIgnoreCase("gamemode") || commandLabel.equalsIgnoreCase("gm")) {
-            mode = getGamemode(arg0);
-            if (arg1 != null) {
-                target = Bukkit.getPlayer(arg1);
+            //Get the gamemode
+            if (commandLabel.equalsIgnoreCase("gamemode") || commandLabel.equalsIgnoreCase("gm")) {
+                mode = getGamemode(arg0);
+                if (arg1 != null) {
+                    target = Bukkit.getPlayer(arg1);
+                }
             }
-        }
 
-        if (commandLabel.equalsIgnoreCase("gmc") || commandLabel.equalsIgnoreCase("gm1")) {
-            mode = GameMode.CREATIVE;
-        }
+            if (commandLabel.equalsIgnoreCase("gmc") || commandLabel.equalsIgnoreCase("gm1")) {
+                mode = GameMode.CREATIVE;
+            }
 
-        if (commandLabel.equalsIgnoreCase("gms") || commandLabel.equalsIgnoreCase("gm0")) {
-            mode = GameMode.SURVIVAL;
-        }
+            if (commandLabel.equalsIgnoreCase("gms") || commandLabel.equalsIgnoreCase("gm0")) {
+                mode = GameMode.SURVIVAL;
+            }
 
-        if (commandLabel.equalsIgnoreCase("gma") || commandLabel.equalsIgnoreCase("gm2")) {
-            mode = GameMode.ADVENTURE;
-        }
+            if (commandLabel.equalsIgnoreCase("gma") || commandLabel.equalsIgnoreCase("gm2")) {
+                mode = GameMode.ADVENTURE;
+            }
 
-        if (commandLabel.equalsIgnoreCase("gmsp") || commandLabel.equalsIgnoreCase("gm3")) {
-            mode = GameMode.SPECTATOR;
-        }
+            if (commandLabel.equalsIgnoreCase("gmsp") || commandLabel.equalsIgnoreCase("gm3")) {
+                mode = GameMode.SPECTATOR;
+            }
 
-        if (mode == null) {
-            player.sendMessage(Color.code("&7Please use &f/gamemode (type)"));
-            return;
-        }
-
-        //Get the target
-        if (target == null && arg0 != null && arg1 != null) {
-            target = Bukkit.getPlayer(arg1);
-            if (target == null) {
-                //Check if the player is online
-                player.sendMessage(Color.code("&7The player you were looking for is not online, player &f" + arg1));
+            if (mode == null) {
+                player.sendMessage(Color.code("&7Please use &f/gamemode (type)"));
                 return;
             }
-        } else target = player;
 
-        changeGamemode(target,mode);
-        sendMessage(player,target.getGameMode().toString(),target.getName());
+            //Get the target
+            if (target == null && arg0 != null && arg1 != null) {
+                target = Bukkit.getPlayer(arg1);
+                if (target == null) {
+                    //Check if the player is online
+                    player.sendMessage(Color.code("&7The player you were looking for is not online, player &f" + arg1));
+                    return;
+                }
+            } else target = player;
+
+            changeGamemode(target, mode);
+            sendMessage(player, target.getGameMode().toString(), target.getName());
+        } else {
+            player.sendMessage(Color.code("&b&lAppToEat &8≫ &fUnknown command."));
+        }
     }
 
     public GameMode getGamemode(String type) {
