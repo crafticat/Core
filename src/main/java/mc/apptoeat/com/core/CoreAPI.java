@@ -4,6 +4,7 @@ import lombok.Getter;
 import mc.apptoeat.com.core.core.config.ConfigManager;
 import mc.apptoeat.com.core.core.managers.DataManager;
 import mc.apptoeat.com.core.core.managers.Managers;
+import mc.apptoeat.com.core.core.tab.TabManager;
 
 @Getter
 public class CoreAPI {
@@ -13,6 +14,7 @@ public class CoreAPI {
     private final ConfigManager configManager;
     private final Managers managers;
     private final DataManager dataManager;
+    private TabManager tab;
 
     public CoreAPI(Core core) {
         plugin = core;
@@ -20,5 +22,6 @@ public class CoreAPI {
         configManager = new ConfigManager();
         managers = new Managers();
         dataManager = new DataManager();
+        this.tab = new TabManager(core);
     }
 }

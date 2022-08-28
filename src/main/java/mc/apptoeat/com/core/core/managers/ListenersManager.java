@@ -11,7 +11,7 @@ public class ListenersManager extends Manager<Listener> {
 
     public ListenersManager() {
         register(new JoinQuitMessages());
-        register(new RankSystem());
+        // register(new RankSystem());
     }
 
     @Override

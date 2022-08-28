@@ -16,39 +16,39 @@ import org.bukkit.event.player.PlayerJoinEvent;
 public class RankSystem implements Listener {
 
 
-
-    @EventHandler
-    public void onJoin(PlayerJoinEvent e) {
-        String group = LuckPermsProvider.get().getUserManager().getUser(e.getPlayer().getName()).getPrimaryGroup();
-        User user = LuckPermsProvider.get().getUserManager().getUser(e.getPlayer().getName());
-
-        if (user != null) {
-            String groupPrefix = user.getCachedData().getMetaData().getPrefix();
-            e.getPlayer().setPlayerListName(Color.code(groupPrefix + " " + e.getPlayer().getName()));
-
-            if (LuckPermsProvider.get().getUserManager().getUser(e.getPlayer().getName()).getPrimaryGroup().equalsIgnoreCase("rep")) {
-                NameTagChanger.changePlayerName(e.getPlayer(), "rep", "", TeamAction.CREATE);
-            } else {
-                NameTagChanger.changePlayerName(e.getPlayer(), groupPrefix, "", TeamAction.CREATE);
-            }
-        }
-    }
-
-    @EventHandler
-    public void onChat(AsyncPlayerChatEvent e) {
-        String group = LuckPermsProvider.get().getUserManager().getUser(e.getPlayer().getName()).getPrimaryGroup();
-        User user = LuckPermsProvider.get().getUserManager().getUser(e.getPlayer().getName());
-
-        if (user != null) {
-            String groupPrefix = user.getCachedData().getMetaData().getPrefix();
-
-            if (group.equalsIgnoreCase("default")) {
-                e.setFormat(Color.code(groupPrefix + "" + e.getPlayer().getDisplayName() + "&7: &7") + e.getMessage());
-            } else {
-                e.setFormat(Color.code(groupPrefix + "" + e.getPlayer().getDisplayName() + "&7: &r") + e.getMessage());
-            }
-        }
-    }
+//
+//    @EventHandler
+//    public void onJoin(PlayerJoinEvent e) {
+//        String group = LuckPermsProvider.get().getUserManager().getUser(e.getPlayer().getName()).getPrimaryGroup();
+//        User user = LuckPermsProvider.get().getUserManager().getUser(e.getPlayer().getName());
+//
+//        if (user != null) {
+//            String groupPrefix = user.getCachedData().getMetaData().getPrefix();
+//            e.getPlayer().setPlayerListName(Color.code(groupPrefix + " " + e.getPlayer().getName()));
+//
+//            if (LuckPermsProvider.get().getUserManager().getUser(e.getPlayer().getName()).getPrimaryGroup().equalsIgnoreCase("rep")) {
+//                NameTagChanger.changePlayerName(e.getPlayer(), "rep", "", TeamAction.CREATE);
+//            } else {
+//                NameTagChanger.changePlayerName(e.getPlayer(), groupPrefix, "", TeamAction.CREATE);
+//            }
+//        }
+//    }
+//
+//    @EventHandler
+//    public void onChat(AsyncPlayerChatEvent e) {
+//        String group = LuckPermsProvider.get().getUserManager().getUser(e.getPlayer().getName()).getPrimaryGroup();
+//        User user = LuckPermsProvider.get().getUserManager().getUser(e.getPlayer().getName());
+//
+//        if (user != null) {
+//            String groupPrefix = user.getCachedData().getMetaData().getPrefix();
+//
+//            if (group.equalsIgnoreCase("default")) {
+//                e.setFormat(Color.code(groupPrefix + "" + e.getPlayer().getDisplayName() + "&7: &7") + e.getMessage());
+//            } else {
+//                e.setFormat(Color.code(groupPrefix + "" + e.getPlayer().getDisplayName() + "&7: &r") + e.getMessage());
+//            }
+//        }
+//    }
 
     /*
     CustomConfig players, ranks;
