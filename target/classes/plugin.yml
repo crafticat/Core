@@ -1,0 +1,7 @@
+name: Core
+version: '1.0-SNAPSHOT'
+main: mc.apptoeat.com.core.Core
+api-version: 1.19
+authors: [ Crafticat ]
+softdepend: [ LuckPerms ]
+description: Made for AppToEat
