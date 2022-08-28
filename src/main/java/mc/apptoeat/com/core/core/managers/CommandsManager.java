@@ -9,6 +9,7 @@ public class CommandsManager extends Manager<Command> {
     public CommandsManager() {
         register(new GamemodeCommand());
         register(new FlyCommand());
+        register(new EnchantCommand());
         register(new TopCommand());
         register(new TeleportCommand());
         register(new SunCommand());
