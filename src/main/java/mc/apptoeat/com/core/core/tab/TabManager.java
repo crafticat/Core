@@ -8,6 +8,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.Plugin;
 
 import java.lang.reflect.Field;
@@ -16,8 +18,8 @@ import java.util.List;
 
 public class TabManager {
 
-    private ChatComponentText header = new ChatComponentText(ChatColor.translateAlternateColorCodes('&', "&8----------------{&bAppToEat&8}----------------"));
-    private ChatComponentText footer = new ChatComponentText(ChatColor.translateAlternateColorCodes('&', "test footer"));
+    private ChatComponentText header;
+    private ChatComponentText footer;
 
     private Core plugin;
 
@@ -26,17 +28,19 @@ public class TabManager {
     }
 
     public void showTab() {
-        if (header == null && footer == null) return;
+        if (header == null || footer == null) return;
 
         Bukkit.getScheduler().scheduleSyncRepeatingTask(plugin, new Runnable() {
+
             PacketPlayOutPlayerListHeaderFooter packet = new PacketPlayOutPlayerListHeaderFooter();
 
             @Override
             public void run() {
                 try {
-                    Field a = packet.getClass().getDeclaredField("header");
+
+                    Field a = packet.getClass().getDeclaredField("a");
                     a.setAccessible(true);
-                    Field b = packet.getClass().getDeclaredField("footer");
+                    Field b = packet.getClass().getDeclaredField("b");
                     b.setAccessible(true);
 
                     a.set(packet, header);

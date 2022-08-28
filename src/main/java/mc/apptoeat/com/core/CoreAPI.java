@@ -5,6 +5,7 @@ import mc.apptoeat.com.core.core.config.ConfigManager;
 import mc.apptoeat.com.core.core.managers.DataManager;
 import mc.apptoeat.com.core.core.managers.Managers;
 import mc.apptoeat.com.core.core.tab.TabManager;
+import org.bukkit.ChatColor;
 
 @Getter
 public class CoreAPI {
@@ -23,5 +24,8 @@ public class CoreAPI {
         managers = new Managers();
         dataManager = new DataManager();
         this.tab = new TabManager(core);
+        tab.setHeader(ChatColor.translateAlternateColorCodes('&', "&f&lAppToEat Network"));
+        tab.setFooter(ChatColor.translateAlternateColorCodes('&', "&7You are correctly playing on mc.apptoeat.com"));
+        tab.showTab();
     }
 }
