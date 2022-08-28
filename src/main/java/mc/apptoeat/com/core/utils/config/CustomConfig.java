@@ -13,8 +13,8 @@ import java.io.IOException;
 @Getter
 public class CustomConfig {
 
-    private FileConfiguration config;
-    private File file;
+    private final FileConfiguration config;
+    private final File file;
 
     public CustomConfig(String name) {
         file = new File(CoreAPI.getPlugin().getDataFolder(), name + ".yml");
