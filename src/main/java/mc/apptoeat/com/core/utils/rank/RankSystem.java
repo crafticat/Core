@@ -4,11 +4,13 @@ import mc.apptoeat.com.core.CoreAPI;
 import mc.apptoeat.com.core.core.listeners.NameTagChanger;
 import mc.apptoeat.com.core.core.managers.DataManager;
 import mc.apptoeat.com.core.utils.commands.Command;
+import mc.apptoeat.com.core.utils.config.CustomConfig;
 import mc.apptoeat.com.core.utils.message.Color;
 import mc.apptoeat.com.core.utils.temp.TeamAction;
 import net.luckperms.api.LuckPermsProvider;
 import net.luckperms.api.model.user.User;
 import org.bukkit.Bukkit;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -24,6 +26,8 @@ import java.util.Map;
 public class RankSystem implements Listener {
 
     Map<Player,String> prefixMap = new HashMap<>();
+
+    private CustomConfig config = new CustomConfig("priority");
 
     @EventHandler
     public void quit(PlayerQuitEvent e) {
@@ -46,7 +50,7 @@ public class RankSystem implements Listener {
                 groupPrefix = Color.code("&7");
             }
 
-            e.getPlayer().setPlayerListName(Color.code(groupPrefix + e.getPlayer().getName()));
+            e.getPlayer().setPlayerListName(Color.code("&" + config.getConfig().getInt(group) + groupPrefix + e.getPlayer().getName()));
 
             prefixMap.put(e.getPlayer(),groupPrefix);
             String finalGroupPrefix = groupPrefix;

@@ -20,15 +20,11 @@ public class CoreAPI {
     private final TabManager tab;
 
     public CoreAPI(Core core) {
-        core.getServer().getPluginManager().registerEvents(new RankSystem(), core);
         plugin = core;
         instance = this;
         configManager = new ConfigManager();
         managers = new Managers();
         dataManager = new DataManager();
         this.tab = new TabManager(core);
-        tab.setHeader(ChatColor.translateAlternateColorCodes('&', "&f&lAppToEat Network"));
-        tab.setFooter(ChatColor.translateAlternateColorCodes('&', "&7You are correctly playing on mc.apptoeat.com"));
-        tab.showTab();
     }
 }
