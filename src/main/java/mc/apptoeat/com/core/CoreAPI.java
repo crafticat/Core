@@ -17,7 +17,6 @@ public class CoreAPI {
     private final ConfigManager configManager;
     private final Managers managers;
     private final DataManager dataManager;
-    private final TabManager tab;
 
     public CoreAPI(Core core) {
         plugin = core;
@@ -25,6 +24,5 @@ public class CoreAPI {
         configManager = new ConfigManager();
         managers = new Managers();
         dataManager = new DataManager();
-        this.tab = new TabManager(core);
     }
 }
