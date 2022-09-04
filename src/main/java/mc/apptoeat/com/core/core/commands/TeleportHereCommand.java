@@ -13,23 +13,27 @@ public class TeleportHereCommand extends Command {
 
     @Override
     public void executeCommand(Player player, String commandLabel, String[] args) {
-        String arg0 = null;
-        if (args.length > 0) {
-            arg0 = args[0];
-        }
+        if (player.hasPermission("core.tphere")) {
+            String arg0 = null;
+            if (args.length > 0) {
+                arg0 = args[0];
+            }
 
-        if (arg0 == null) {
-            player.sendMessage(Color.code("&7Please specify a player to teleport to."));
-            return;
-        }
+            if (arg0 == null) {
+                player.sendMessage(Color.code("&7Please specify a player to teleport to."));
+                return;
+            }
 
-        Player target = Bukkit.getPlayer(arg0);
-        if (target == null) {
-            player.sendMessage(Color.code("&7The player you were looking for was not online"));
-            return;
-        }
+            Player target = Bukkit.getPlayer(arg0);
+            if (target == null) {
+                player.sendMessage(Color.code("&7The player you were looking for was not online"));
+                return;
+            }
 
-        sendMessage(player,target.getName(),"null");
-        target.teleport(player.getLocation());
+            sendMessage(player, target.getName(), "null");
+            target.teleport(player.getLocation());
+        } else {
+            player.sendMessage(Color.code("&b&lAppToEat &8≫ &fUnknown command."));
+        }
     }
 }

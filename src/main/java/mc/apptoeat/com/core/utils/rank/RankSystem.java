@@ -3,6 +3,7 @@ package mc.apptoeat.com.core.utils.rank;
 import mc.apptoeat.com.core.CoreAPI;
 import mc.apptoeat.com.core.core.listeners.NameTagChanger;
 import mc.apptoeat.com.core.core.managers.DataManager;
+import mc.apptoeat.com.core.utils.commands.Command;
 import mc.apptoeat.com.core.utils.message.Color;
 import mc.apptoeat.com.core.utils.temp.TeamAction;
 import net.luckperms.api.LuckPermsProvider;
@@ -14,6 +15,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.scoreboard.Team;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -45,6 +47,7 @@ public class RankSystem implements Listener {
             }
 
             e.getPlayer().setPlayerListName(Color.code(groupPrefix + e.getPlayer().getName()));
+
             prefixMap.put(e.getPlayer(),groupPrefix);
             String finalGroupPrefix = groupPrefix;
             Bukkit.getServer().getOnlinePlayers().forEach(player -> {

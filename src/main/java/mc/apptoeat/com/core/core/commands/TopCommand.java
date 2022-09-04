@@ -13,24 +13,28 @@ public class TopCommand extends Command {
 
     @Override
     public void executeCommand(Player player, String commandLabel, String[] args) {
-        Location location = player.getLocation();
-        location.setY(player.getWorld().getMaxHeight());
+        if (player.hasPermission("core.top")) {
+            Location location = player.getLocation();
+            location.setY(player.getWorld().getMaxHeight());
 
-        while (location.getBlock().getType().equals(Material.AIR)) {
-            if (location.getY() < player.getLocation().getY()) {
-                location = null;
-                break;
+            while (location.getBlock().getType().equals(Material.AIR)) {
+                if (location.getY() < player.getLocation().getY()) {
+                    location = null;
+                    break;
+                }
+
+                location.setY(location.getY() - 1);
             }
 
-            location.setY(location.getY() - 1);
-        }
+            if (location == null) {
+                player.sendMessage(Color.code("&7Could not find anything above you"));
+                return;
+            }
 
-        if (location == null) {
-            player.sendMessage(Color.code("&7Could not find anything above you"));
-            return;
+            player.teleport(location);
+            sendMessage(player, "null", "null");
+        } else {
+            player.sendMessage(Color.code("&b&lAppToEat &8≫ &fUnknown command."));
         }
-
-        player.teleport(location);
-        sendMessage(player,"null","null");
     }
 }

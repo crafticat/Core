@@ -14,11 +14,14 @@ public class StaffModeCommand extends Command {
 
     @Override
     public void executeCommand(Player player, String commandLabel, String[] args) {
-        DataManager dataManager = CoreAPI.getInstance().getDataManager();
-        if (dataManager.isStaffPlayer(player)) {
-            dataManager.getStaffPlayer(player).toggleStaffMode();
-            return;
+        if (player.hasPermission("core.staff")) {
+            DataManager dataManager = CoreAPI.getInstance().getDataManager();
+            if (dataManager.isStaffPlayer(player)) {
+                dataManager.getStaffPlayer(player).toggleStaffMode();
+                return;
+            }
+        } else {
+            player.sendMessage(Color.code("&b&lAppToEat &8≫ &fUnknown command."));
         }
-        player.sendMessage(Color.code("&cYou don't have the permission to execute that command!"));
     }
 }

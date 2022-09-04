@@ -14,8 +14,8 @@ public class SpeedCommand extends Command {
     @Override
     public void executeCommand(Player player, String commandLabel, String[] args) {
 
-        if(!player.hasPermission("staffspeed.speed")){
-            player.sendMessage(Color.code("&cYou Don't Have permission to do this command!"));
+        if(!player.hasPermission("core.speed")){
+            player.sendMessage(Color.code("&b&lAppToEat &8≫ &fUnknown command."));
             return;
         }
         int speed = 1;
