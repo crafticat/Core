@@ -3,6 +3,7 @@ package mc.apptoeat.com.core.utils.rank;
 import mc.apptoeat.com.core.CoreAPI;
 import mc.apptoeat.com.core.core.listeners.NameTagChanger;
 import mc.apptoeat.com.core.core.managers.DataManager;
+import mc.apptoeat.com.core.core.managers.TeamManager;
 import mc.apptoeat.com.core.utils.commands.Command;
 import mc.apptoeat.com.core.utils.config.CustomConfig;
 import mc.apptoeat.com.core.utils.message.Color;
@@ -50,7 +51,9 @@ public class RankSystem implements Listener {
                 groupPrefix = Color.code("&7");
             }
 
-            e.getPlayer().setPlayerListName(Color.code("&" + config.getConfig().getInt(group) + groupPrefix + e.getPlayer().getName()));
+            // e.getPlayer().setDisplayName("" + config.getConfig().getInt(group) + "123");
+            e.getPlayer().setPlayerListName(Color.code(groupPrefix + e.getPlayer().getDisplayName()));
+            TeamManager.changePlayerTeam(e.getPlayer(), config.getConfig().getInt(group), TeamAction.UPDATE);
 
             prefixMap.put(e.getPlayer(),groupPrefix);
             String finalGroupPrefix = groupPrefix;
