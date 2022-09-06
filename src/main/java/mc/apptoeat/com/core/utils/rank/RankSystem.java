@@ -41,7 +41,9 @@ public class RankSystem implements Listener {
         User user = LuckPermsProvider.get().getUserManager().getUser(e.getPlayer().getName());
 
         prefixMap.forEach((p,s) -> {
-            NameTagChanger.changeNameTag(e.getPlayer(),p, s,"",TeamAction.CREATE);
+            // NameTagChanger.changeNameTag(e.getPlayer(),p, s,"",TeamAction.CREATE);
+            TeamManager.changePlayerTeam(p, s, TeamAction.CREATE);
+            TeamManager.changePlayerTeam(p, s, TeamAction.UPDATE);
         });
 
         if (user != null) {
@@ -52,13 +54,17 @@ public class RankSystem implements Listener {
             }
 
             // e.getPlayer().setDisplayName("" + config.getConfig().getInt(group) + "123");
-            e.getPlayer().setPlayerListName(Color.code(groupPrefix + e.getPlayer().getDisplayName()));
-            TeamManager.changePlayerTeam(e.getPlayer(), config.getConfig().getInt(group), TeamAction.UPDATE);
+            e.getPlayer().setPlayerListName(Color.code(groupPrefix + e.getPlayer().getName()));
+            TeamManager.changePlayerTeam(e.getPlayer(), config.getConfig().getString(group), TeamAction.CREATE);
+            TeamManager.changePlayerTeam(e.getPlayer(), config.getConfig().getString(group), TeamAction.UPDATE);
 
-            prefixMap.put(e.getPlayer(),groupPrefix);
+            // prefixMap.put(e.getPlayer(), groupPrefix);
+            prefixMap.put(e.getPlayer(), config.getConfig().getString(group));
             String finalGroupPrefix = groupPrefix;
             Bukkit.getServer().getOnlinePlayers().forEach(player -> {
-                NameTagChanger.changeNameTag(player,e.getPlayer(), finalGroupPrefix,"",TeamAction.CREATE);
+                String groupPlayer = LuckPermsProvider.get().getUserManager().getUser(player.getName()).getPrimaryGroup();
+                TeamManager.changePlayerTeam(player, config.getConfig().getString(groupPlayer), TeamAction.CREATE);
+                TeamManager.changePlayerTeam(player, config.getConfig().getString(groupPlayer), TeamAction.UPDATE);
             });
         }
     }
