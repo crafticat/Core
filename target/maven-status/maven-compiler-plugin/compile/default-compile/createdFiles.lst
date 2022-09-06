@@ -26,7 +26,6 @@ mc\apptoeat\com\core\core\managers\TeamManager.class
 mc\apptoeat\com\core\utils\runnable\StringFromPlayerRunnable.class
 mc\apptoeat\com\core\core\commands\TeleportHereCommand.class
 mc\apptoeat\com\core\core\listeners\NameTagChanger.class
-mc\apptoeat\com\core\core\tab\TabManager.class
 mc\apptoeat\com\core\utils\rank\RankSystem.class
 mc\apptoeat\com\core\utils\config\FileManager.class
 mc\apptoeat\com\core\utils\scoreboard\ScoreBoard$1.class
@@ -35,7 +34,6 @@ mc\apptoeat\com\core\CoreAPI.class
 mc\apptoeat\com\core\utils\scoreboard\ScoreBoard.class
 mc\apptoeat\com\core\core\staff\StaffPlayer.class
 mc\apptoeat\com\core\utils\blocker\Blocker.class
-mc\apptoeat\com\core\core\tab\TabManager$1.class
 mc\apptoeat\com\core\core\staff\items\VanishItem.class
 mc\apptoeat\com\core\core\managers\ItemsManager.class
 mc\apptoeat\com\core\Core.class

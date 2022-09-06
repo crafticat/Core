@@ -4,7 +4,6 @@ import lombok.Getter;
 import mc.apptoeat.com.core.core.config.ConfigManager;
 import mc.apptoeat.com.core.core.managers.DataManager;
 import mc.apptoeat.com.core.core.managers.Managers;
-import mc.apptoeat.com.core.core.tab.TabManager;
 import mc.apptoeat.com.core.utils.rank.RankSystem;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
