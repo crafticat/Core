@@ -26,49 +26,6 @@ import java.util.Map;
 
 public class RankSystem implements Listener {
 
-    Map<Player,String> prefixMap = new HashMap<>();
-
-    private CustomConfig config = new CustomConfig("priority");
-
-    @EventHandler
-    public void quit(PlayerQuitEvent e) {
-        prefixMap.remove(e.getPlayer());
-    }
-
-    @EventHandler
-    public void onJoin(PlayerJoinEvent e) {
-        String group = LuckPermsProvider.get().getUserManager().getUser(e.getPlayer().getName()).getPrimaryGroup();
-        User user = LuckPermsProvider.get().getUserManager().getUser(e.getPlayer().getName());
-
-        prefixMap.forEach((p,s) -> {
-            // NameTagChanger.changeNameTag(e.getPlayer(),p, s,"",TeamAction.CREATE);
-            TeamManager.changePlayerTeam(p, s, TeamAction.CREATE);
-            TeamManager.changePlayerTeam(p, s, TeamAction.UPDATE);
-        });
-
-        if (user != null) {
-            String groupPrefix = user.getCachedData().getMetaData().getPrefix();
-            if (groupPrefix.length() > 16) {
-
-                groupPrefix = Color.code("&7");
-            }
-
-            // e.getPlayer().setDisplayName("" + config.getConfig().getInt(group) + "123");
-            e.getPlayer().setPlayerListName(Color.code(groupPrefix + e.getPlayer().getName()));
-            TeamManager.changePlayerTeam(e.getPlayer(), config.getConfig().getString(group), TeamAction.CREATE);
-            TeamManager.changePlayerTeam(e.getPlayer(), config.getConfig().getString(group), TeamAction.UPDATE);
-
-            // prefixMap.put(e.getPlayer(), groupPrefix);
-            prefixMap.put(e.getPlayer(), config.getConfig().getString(group));
-            String finalGroupPrefix = groupPrefix;
-            Bukkit.getServer().getOnlinePlayers().forEach(player -> {
-                String groupPlayer = LuckPermsProvider.get().getUserManager().getUser(player.getName()).getPrimaryGroup();
-                TeamManager.changePlayerTeam(player, config.getConfig().getString(groupPlayer), TeamAction.CREATE);
-                TeamManager.changePlayerTeam(player, config.getConfig().getString(groupPlayer), TeamAction.UPDATE);
-            });
-        }
-    }
-
     @EventHandler
     public void onChat(AsyncPlayerChatEvent e) {
         String group = LuckPermsProvider.get().getUserManager().getUser(e.getPlayer().getName()).getPrimaryGroup();
