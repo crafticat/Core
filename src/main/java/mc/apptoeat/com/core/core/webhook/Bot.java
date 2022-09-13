@@ -5,7 +5,7 @@ import net.md_5.bungee.api.ChatColor;
 import java.awt.*;
 
 public class Bot {
-    private static String webhookURL = "https://discord.com/api/webhooks/1019214891216818177/3xHWiiDTibeYfeZL6rasCBuPo7b6EkUWyJf9n9CGobaPX2h0eNMnmE3w09lY1tQbcLIR";
+    private static String webhookURL = "https://discord.com/api/webhooks/1019242162371698709/Df8BRfffQMHEq22RUOqmwMDwdKTFvthbdFqBOXqjhTWIRoKxCw5UeZN2_9bSjaG8ddit";
 
     private static DiscordWebhook webhook = new DiscordWebhook(webhookURL);
 
