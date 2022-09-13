@@ -17,6 +17,7 @@ import org.bukkit.entity.Player;
 import java.awt.*;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Properties;
 
 public class ReportCommand extends Command {
 
@@ -51,9 +52,9 @@ public class ReportCommand extends Command {
                     TextComponent message2 = new TextComponent();
 
                     if (args.length >= 2) {
-                        Bot.sendReportMessage(player.getName() + " reported " + args[0], args[1], 18, 202, 219);
+                        Bot.sendReportMessage(player.getName() + " reported " + args[0], args[1], player.getServer().getServerName(), 18, 202, 219);
                     } else {
-                        Bot.sendReportMessage(player.getName() + " reported " + args[0], null, 18, 202, 219);
+                        Bot.sendReportMessage(player.getName() + " reported " + args[0], null, player.getServer().getServerName(), 18, 202, 219);
                     }
 
                     for (Player p : Bukkit.getOnlinePlayers()) {

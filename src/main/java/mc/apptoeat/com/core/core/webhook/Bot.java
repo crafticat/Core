@@ -9,11 +9,11 @@ public class Bot {
 
     private static DiscordWebhook webhook = new DiscordWebhook(webhookURL);
 
-    public static void sendReportMessage(String message, String reason, int c1, int c2, int c3) {
+    public static void sendReportMessage(String message, String reason, String server, int c1, int c2, int c3) {
         if (reason == null) {
-            webhook.addEmbed(new DiscordWebhook.EmbedObject().setTitle("Report").setDescription(message + ".").setColor(new Color(c1, c2, c3)));
+            webhook.addEmbed(new DiscordWebhook.EmbedObject().setTitle("Report").setDescription(message + " on server " + server + ".").setColor(new Color(c1, c2, c3)));
         } else {
-            webhook.addEmbed(new DiscordWebhook.EmbedObject().setTitle("Report").setDescription(message + ". Reason: " + reason).setColor(new Color(c1, c2, c3)));
+            webhook.addEmbed(new DiscordWebhook.EmbedObject().setTitle("Report").setDescription(message + " on server " + server + ". Reason: " + reason).setColor(new Color(c1, c2, c3)));
         }
         try {
             webhook.execute();
