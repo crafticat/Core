@@ -9,29 +9,29 @@ import org.bukkit.util.NumberConversions;
 public class EnchantCommand extends Command {
 
     public EnchantCommand() {
-        super("enchant", "enchants your item", "&fYou item has been enchanted.");
+        super("enchant", "enchants your item", "&fYour item has been enchanted.");
     }
 
     @Override
     public void executeCommand(Player player, String commandLabel, String[] args) {
         if (player.hasPermission("core.enchant")) {
             if (args.length <= 0) {
-                player.sendMessage(Color.code("&7Please use &f/enchant [enchant] [level]"));
+                player.sendMessage(Color.code("&7Please use &f/enchant [enchant id] [level]"));
                 return;
             }
 
-            String enchantString = args[0];
+            int enchantId = Integer.parseInt(args[0]);
             String levelString = "1";
             if (args.length > 1) levelString = args[1];
 
-            Enchantment enchant = Enchantment.getByName(enchantString);
+            Enchantment enchant = Enchantment.getById(enchantId);
             if (enchant == null) {
-                player.sendMessage(Color.code("&cEnchant was not found, name " + enchantString));
+                player.sendMessage(Color.code("&cEnchant was not found, id: " + enchantId));
                 return;
             }
-            int level = NumberConversions.toInt(levelString);
+            int level = Integer.parseInt(levelString);
 
-            player.getInventory().getItemInHand().addEnchantment(enchant, level);
+            player.getInventory().getItemInHand().addUnsafeEnchantment(enchant, level);
             player.sendMessage(Color.code("7You have enchanted your item to level &b" + level));
         } else {
             player.sendMessage(Color.code("&b&lAppToEat &8≫ &fUnknown command."));
