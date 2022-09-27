@@ -5,6 +5,7 @@ import mc.apptoeat.com.core.core.config.ConfigManager;
 import mc.apptoeat.com.core.core.managers.DataManager;
 import mc.apptoeat.com.core.core.managers.Managers;
 import mc.apptoeat.com.core.utils.rank.RankSystem;
+import mc.apptoeat.com.core.utils.tags.TagUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 
@@ -23,5 +24,6 @@ public class CoreAPI {
         configManager = new ConfigManager();
         managers = new Managers();
         dataManager = new DataManager();
+        TagUtil.loadSavedTags();
     }
 }

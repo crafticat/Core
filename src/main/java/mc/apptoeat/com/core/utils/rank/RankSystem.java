@@ -7,6 +7,7 @@ import mc.apptoeat.com.core.core.managers.TeamManager;
 import mc.apptoeat.com.core.utils.commands.Command;
 import mc.apptoeat.com.core.utils.config.CustomConfig;
 import mc.apptoeat.com.core.utils.message.Color;
+import mc.apptoeat.com.core.utils.tags.TagUtil;
 import mc.apptoeat.com.core.utils.temp.TeamAction;
 import net.luckperms.api.LuckPermsProvider;
 import net.luckperms.api.model.user.User;
@@ -33,11 +34,20 @@ public class RankSystem implements Listener {
 
         if (user != null) {
             String groupPrefix = user.getCachedData().getMetaData().getPrefix();
+            String tag = TagUtil.getUsedTag(e.getPlayer()).getSubfix();
 
-            if (group.equalsIgnoreCase("default")) {
-                e.setFormat(Color.code(groupPrefix + "" + e.getPlayer().getDisplayName() + "&7: &7") + e.getMessage());
+            if (TagUtil.getUsedTag(e.getPlayer()) == null) {
+                if (group.equalsIgnoreCase("default")) {
+                    e.setFormat(Color.code(groupPrefix + "" + e.getPlayer().getDisplayName() + "&7: &7") + e.getMessage());
+                } else {
+                    e.setFormat(Color.code(groupPrefix + "" + e.getPlayer().getDisplayName() + "&7: &r") + e.getMessage());
+                }
             } else {
-                e.setFormat(Color.code(groupPrefix + "" + e.getPlayer().getDisplayName() + "&7: &r") + e.getMessage());
+                if (group.equalsIgnoreCase("default")) {
+                    e.setFormat(Color.code(groupPrefix + "" + e.getPlayer().getDisplayName() + " " + tag + "&7: &7") + e.getMessage());
+                } else {
+                    e.setFormat(Color.code(groupPrefix + "" + e.getPlayer().getDisplayName() + " " + tag + "&7: &r") + e.getMessage());
+                }
             }
         }
     }
